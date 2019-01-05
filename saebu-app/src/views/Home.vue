@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <Saebu msg="Hallo vreemdeling"/>
+  <div class="homefrm">
    <b-form-group
       id="fieldset1"
       description="Met wie hebben we te maken?"
-      label="Enter your name"
+      label="Zeg het maar"
       label-for="input1"
       :invalid-feedback="invalidFeedback"
       :valid-feedback="validFeedback"
@@ -12,9 +13,13 @@
   >
     <b-form-input id="input1" :state="state" v-model.trim="name"></b-form-input>
   </b-form-group>
- </div>
+  </div>
+</div>
 </template>
+
 <script>
+// @ is an alias to /src
+import Saebu from "@/components/Saebu.vue";
 
 export default {
   name: "home",
@@ -29,13 +34,13 @@ computed: {
       if (this.name.length > 4) {
         return ''
       } else if (this.name.length > 0) {
-        return 'Enter at least 4 characters'
+        return 'Minimaal 4 karakters'
       } else {
-        return 'Please enter something'
+        return 'Nou...'
       }
     },
     validFeedback () {
-      return this.state === true ? 'Thank you' : ''
+      return this.state === true ? 'Was dat nou zo moeilijk?' : ''
     }
   },
   data () {
@@ -43,8 +48,14 @@ computed: {
       name: ''
     }
   }
-}
+};
 
-// @ is an alias to /src
-import Saebu from "@/components/Saebu.vue";
 </script>
+
+<style scoped>
+.home {
+  max-width: 600px;
+  margin: auto;
+  padding: 1em;
+}
+</style>
