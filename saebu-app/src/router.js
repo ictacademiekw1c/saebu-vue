@@ -1,9 +1,17 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import VueMeta from 'vue-meta';
 
 
 Vue.use(Router);
+Vue.use(VueMeta, {
+  keyName: 'metaInfo',
+  attribute: 'data-vue-meta',
+  ssrAttribute: 'data-vue-meta-server-rendered',
+  tagIDKeyName: 'vmid',
+  refreshOnceOnNavigation: true
+});
 
 export default new Router({
   routes: [

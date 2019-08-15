@@ -2,12 +2,12 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      Welkom op de saebu site, wie ben je en wat kom je hier doen?
+      Welkom op de saebu site, wie ben je?
     </p>
-    <h3>Sites van familieleden</h3>
-    <ul>
-      <li></li>
-    </ul>
+    <p>
+      Selamat datang di situs keluarga Saebu, siapa engkau?
+    </p>
+    
   </div>
 </template>
 

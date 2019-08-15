@@ -1,16 +1,14 @@
 <template>
   <div class="about">
     <h1>Saebu.nl</h1>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-             Irritant?
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
     <p>
       Dit is de saebu.nl site die is opgezet door Abu Saebu en toegankelijk is voor de gehele familie Saebu. <br>
-      Alle Saebu's in Nederland behoren tot 1 bloedverwantschap en 1 en dezelfde stamboom. Onze roots bevinden zich 
-      in Makasar (Zuid-Sulawesi).
+      Alle Saebu's in Nederland/Indonesie of elders behoren tot 1 bloedverwantschap en 1 en dezelfde stamboom. Onze roots bevinden zich 
+      in Makasar en in Sinjai (beiden Sul-Sel, Indonesia).
+      </p>
+    <p>
+      Yakni situs ini bernama saebu.nl yang dibikin oleh Abu Saebu dan bisa dimanfaatkan oleh semuah warga keluarga Saebu.
+      Asal kami di Makasar dan Sinjai (berdua di Sul-Sel, Indonesia).
       </p>
   </div>
 </template>
