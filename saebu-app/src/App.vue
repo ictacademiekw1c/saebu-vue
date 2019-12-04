@@ -2,9 +2,12 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home - pulang</router-link> |
-      <router-link to="/about">Over - tentang kita</router-link>
+      <router-link to="/about">Over - tentang kita</router-link> 
+      <router-link to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
+      <router-link v-if="!authenticated" to="/login">| Login - Pintu masuk </router-link> 
+      <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
     </div>
-    <router-view/>
+     <router-view @authenticated="setAuthenticated" />
   </div>
 </template>
 
@@ -21,7 +24,31 @@
         name: 'description',
         content: 'De site van de familie Saebu, Situs keluarga Saebu di Belanda, Indonesia dan seluruh dunia. Hoe ziet de stamboom eruit, Wie zijn mijn voorouders.' 
         }]
-    }
+    },
+     data() {
+            return {
+                authenticated: false,
+                authMessage: "",
+                mockAccount: {
+                    username: "abu",
+                    password: "tjitjusaga"
+                }
+            }
+        },
+        mounted() {
+            if(!this.authenticated) {
+                this.$router.replace({ name: "login" });
+            }
+        },
+        methods: {
+            setAuthenticated(status) {
+                this.authenticated = status;
+            },
+            logout() {
+                this.authenticated = false;
+            }
+        }
+
   }
 </script>
 
