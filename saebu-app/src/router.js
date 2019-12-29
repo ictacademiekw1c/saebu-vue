@@ -5,6 +5,8 @@ import Secure from "./views/Secure.vue";
 import Siapa from "./views/Siapa.vue";
 import VueMeta from 'vue-meta';
 
+import store from "./store";
+
 
 Vue.use(Router);
 Vue.use(VueMeta, {
@@ -20,7 +22,14 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      beforeEnter(to,from, next) {
+        if (store.state.authenticated) {
+            next();
+        } else {
+          next('/login');
+        }
+      }
     },
     {
       path: "/wiebenje",
@@ -46,9 +55,17 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/Login.vue")
     },
     {
-            path: "/secure",
-            name: "secure",
-            component: Secure
+      path: "/secure",
+      name: "secure",
+      component: Secure,
+      beforeEnter(to,from, next) {
+        if (store.state.authenticated) {
+            console.log('Ingelogd toch?');
+            next();
+        } else {
+          next('/login');
+        }
+      }
     }
   ]
 });

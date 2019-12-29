@@ -4,10 +4,11 @@
       <router-link to="/">Home - pulang</router-link> |
       <router-link to="/about">Over - tentang kita</router-link> 
       <router-link to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
-      <router-link v-if="!authenticated" to="/login">| Login - Pintu masuk </router-link> 
-      <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
+      <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
+      <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
     </div>
      <router-view @authenticated="setAuthenticated" />
+     <footer>&copy; Saebu, 2019  || {{ this.$store.state.userAccount }}</footer>
   </div>
 </template>
 
@@ -27,25 +28,25 @@
     },
      data() {
             return {
-                authenticated: false,
                 authMessage: "",
                 mockAccount: {
                     username: "abu",
                     password: "tjitjusaga"
-                }
+                },                
+                jaar: 0
             }
         },
-        mounted() {
-            if(!this.authenticated) {
-                this.$router.replace({ name: "login" });
-            }
+        created() {
+            var dt = new Date();
+            jaar = dt.GetYear();
         },
         methods: {
             setAuthenticated(status) {
-                this.authenticated = status;
+                this.$store.state.authenticated = status;
             },
             logout() {
-                this.authenticated = false;
+                this.$store.state.userAccount = "Anonymous";
+                this.$store.state.authenticated = false;
             }
         }
 

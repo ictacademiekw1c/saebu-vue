@@ -2,7 +2,7 @@
     <div id="secure">
         <h1>Besloten pagina</h1>
         <p>
-            Je bent ingelogd en deze pagina is alleen te zien wanneer je bent ingelogd.
+            Je bent ingelogd als {{ $store.state.userAccount }} en deze pagina is alleen te zien wanneer je bent ingelogd.
         </p>
         <p>
             Engkau masuk ke situs Saebu di mana ini terlihat khusus untuk warga keluarga ini.
