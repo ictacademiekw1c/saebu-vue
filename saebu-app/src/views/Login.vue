@@ -5,7 +5,7 @@
             <ul>
                 <li >{{ errors[errors.length-1] }}</li>
             </ul>
-            </div>
+        </div>
         <div><label>Naam | Nama</label>:&nbsp;<input type="text" name="username" v-model="username" placeholder="Naam | Nama" /></div>
         <div><label>Wachtwoord | Kata sandi</label>:&nbsp;<input type="password" name="password" v-model="password" placeholder="Wachtwoord | kata sandi" /></div>
         <div><label /><button type="button" v-on:click="login()">Login</button></div>
@@ -14,22 +14,47 @@
 </template>
 
 <script>
+    const querystring = require('querystring');
+
     export default {
         name: 'Login',
         message: "",
         methods: {
             login() {
                 this.message = '';
-                if(this.username != "" && this.password != "") {
+                if(this.username != "" && this.password != "") {                
+                    axios
+                    .post('http://mongorest:8088/auth.php', querystring.stringify({
+                        login : this.username,
+                        password : this.password
+                    }))
+                    .then(response => {
+                        //console.log(response);
+                        if (response.data.status == "ok") {
+                            this.$store.state.userAccount = this.username;
+                            this.$store.state.authenticated = true;
+                            this.$router.replace({ name: "secure" });
+                        }
+                        else {
+                            this.errors.push(response.response);
+                        }
+                    })
+                    .catch(error => {
+                        this.errors.push("Server could not authenticate");
+                    });
+                    
+                    /*
                     if(this.username == this.$parent.mockAccount.username && this.password == this.$parent.mockAccount.password) {
                         
                         this.$store.state.userAccount = this.username;
                         this.$store.state.authenticated = true;
-                        this.$router.replace({ name: "secure" });
-                    } else {
+                    */
+
+                    //this.$router.replace({ name: "secure" });
+                   /* } else {
                         
                         this.errors.push("The username and / or password is incorrect");
-                    }
+                    }*/
                 } else {
                     
                     this.errors.push("A username and password must be present");
