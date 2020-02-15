@@ -22,19 +22,18 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home,
-      beforeEnter(to,from, next) {
-        if (store.state.authenticated) {
-            next();
-        } else {
-          next('/login');
-        }
-      }
+      component: Home
     },
     {
       path: "/wiebenje",
       name: "siapakau",
       component: Siapa
+    },
+    {
+      path: "/tree",
+      name: "tree",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Tree.vue")
     },
     {
       path: "/about",

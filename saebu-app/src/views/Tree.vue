@@ -1,17 +1,17 @@
 <template>
-  <div class="home">
-  <Saebu msg="Welkom - Selamat datang"/>
-</div>
+  <div class="tree">
+    <Family />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Saebu from "@/components/Saebu.vue";
+import Family from "@/components/Family.vue";
 
 export default {
-  name: "home",
+  name: "family",
   components: {
-    Saebu
+    Family
   },
 computed: {
   },
@@ -23,7 +23,7 @@ computed: {
 </script>
 
 <style scoped>
-.home {
+.family {
   max-width: 600px;
   margin: auto;
   padding: 1em;

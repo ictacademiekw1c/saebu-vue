@@ -1,54 +1,138 @@
 <template>
-     <input v-model="$v.name.$model" :class="status($v.name)">
+  <div class="home">
+  <Saebu msg="Welkom - Selamat datang"/>
+  <div class="homefrm">
+    <!-- name -->
+   <b-form-group
+      id="fieldset1"
+      description=""
+      label="Wie ben jij? Siapa engkau?"
+      label-for="name"
+      :invalid-feedback="invalidFeedback"
+      :valid-feedback="validFeedback"
+      :state="state"
+  >
+                  <b-form-input id="name" :state="state" v-model.trim="name"></b-form-input>  
+  </b-form-group>
+ 
+ <!-- namefather -->
+   <b-form-group
+      id="fieldset2"
+      description=""
+      label="Wie is je vader? Siapa Bapakmu?"
+      label-for="namefather"
+      :invalid-feedback="invalidFeedbackF"
+      :valid-feedback="validFeedbackF"
+      :state="stateF"
+  >
+
+  <b-form-input id="namefather" :state="stateF" v-model.trim="namefather"></b-form-input>
+  </b-form-group>
+
+  <!-- namemother -->
+     <b-form-group
+      id="fieldset3"
+      description=""
+      label="Wie is je moeder? Siapa Ibumu?"
+      label-for="namemother"
+      :invalid-feedback="invalidFeedbackM"
+      :valid-feedback="validFeedbackM"
+      :state="stateM"
+  >
+    <b-form-input id="email" :state="stateE" v-model.trim="email"></b-form-input>
+  </b-form-group>
+  <!-- namemother -->
+     <b-form-group
+      id="fieldset4"
+      description=""
+      label="Je email? Emailmu?"
+      label-for="email"
+      :invalid-feedback="invalidFeedbackE"
+      :valid-feedback="validFeedbackE"
+      :state="stateM"
+  >
+    <b-form-input id="email" :state="stateE" v-model.trim="email"></b-form-input>
+  </b-form-group>
+
+        <button type="button"  class="close" data-dismiss="alert" aria-label="Close">
+               Meld me aan - Mau jadi warga
+        </button>
+ 
+  </div>
+</div>
 </template>
 
 <script>
-import { required, minLength, between } from 'vuelidate/lib/validators'
+// @ is an alias to /src
+import Saebu from "@/components/Saebu.vue";
 
 export default {
-    name: 'Siapa',
-    data: {
-        name: ''
-    },
-    validations: {
-  	name: {
-    	required
-    }
+  name: "home",
+  components: {
+    Saebu
   },
-  methods: {
-  	status(validation) {
-    	return {
-      	error: validation.$error,
-        dirty: validation.$dirty
+computed: {
+    state () {
+      return this.name.length >= 3 ? true : false
+    },
+    stateF () {
+      return this.namefather.length >= 3 ? true : false
+    },
+    stateM () {
+      return this.namemother.length >= 3 ? true : false
+    },
+    invalidFeedback () {
+      if (this.name.length > 3) {
+        return ''
+      } else if (this.name.length > 0) {
+        return 'Minimaal 3 karakters - 3 huruf mesti'
+      } else {
+        return 'Ik wacht.. menungguin...'
+      }
+    },
+    validFeedback () {
+      return this.state === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
+    },
+    validFeedbackM () {
+      return this.stateM === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
+    },
+    validFeedbackF () {
+      return this.stateF === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
+    },
+    invalidFeedbackF () {
+      if (this.namefather.length > 3) {
+        return ''
+      } else if (this.namefather.length > 0) {
+        return 'Minimaal 3 karakters - 3 huruf mesti'
+      } else {
+        return 'Ik wacht.. menungguin...'
+      }
+    },
+    invalidFeedbackM () {
+      if (this.namemother.length > 3) {
+        return ''
+      } else if (this.namemother.length > 0) {
+        return 'Minimaal 3 karakters - 3 huruf mesti'
+      } else {
+        return 'Ik wacht.. menungguin...'
       }
     }
+  },
+  data () {
+    return {
+      name: '',
+      namefather: '',
+      namemother: ''
+    }
   }
-}
+};
+
 </script>
 
 <style scoped>
-input {
-  border: 1px solid silver;
-  border-radius: 4px;
-  background: white;
-  padding: 5px 10px;
-}
-
-.dirty {
-  border-color: #5A5;
-  background: #EFE;
-}
-
-.dirty:focus {
-  outline-color: #8E8;
-}
-
-.error {
-  border-color: red;
-  background: #FDD;
-}
-
-.error:focus {
-  outline-color: #F99;
+.home {
+  max-width: 600px;
+  margin: auto;
+  padding: 1em;
 }
 </style>

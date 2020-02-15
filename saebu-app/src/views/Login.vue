@@ -43,18 +43,6 @@
                         this.errors.push("Server could not authenticate");
                     });
                     
-                    /*
-                    if(this.username == this.$parent.mockAccount.username && this.password == this.$parent.mockAccount.password) {
-                        
-                        this.$store.state.userAccount = this.username;
-                        this.$store.state.authenticated = true;
-                    */
-
-                    //this.$router.replace({ name: "secure" });
-                   /* } else {
-                        
-                        this.errors.push("The username and / or password is incorrect");
-                    }*/
                 } else {
                     
                     this.errors.push("A username and password must be present");

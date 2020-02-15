@@ -4,11 +4,12 @@
       <router-link to="/">Home - pulang</router-link> |
       <router-link to="/about">Over - tentang kita</router-link> 
       <router-link to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
+      <router-link v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </router-link> 
       <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
     </div>
      <router-view @authenticated="setAuthenticated" />
-     <footer>&copy; Saebu, 2019  || {{ this.$store.state.userAccount }}</footer>
+     <footer>Saebu &copy;&nbsp;{{ getJaar }}  || {{ this.$store.state.userAccount }}</footer>
   </div>
 </template>
 
@@ -28,28 +29,24 @@
     },
      data() {
             return {
-                authMessage: "",
-                mockAccount: {
-                    username: "abu",
-                    password: "tjitjusaga"
-                },                
-                jaar: 0
+                authMessage: ""
             }
-        },
-        created() {
-            var dt = new Date();
-            jaar = dt.GetYear();
-        },
-        methods: {
-            setAuthenticated(status) {
-                this.$store.state.authenticated = status;
-            },
-            logout() {
-                this.$store.state.userAccount = "Anonymous";
-                this.$store.state.authenticated = false;
+        }, //einde data
+    computed: {
+            getJaar() {
+                var dt = new Date();
+                return dt.getFullYear();
             }
-        }
-
+          }, //einde computed
+    methods: {
+          setAuthenticated(status) {
+              this.$store.state.authenticated = status;
+          },
+          logout() {
+              this.$store.state.userAccount = "Anonymous";
+              this.$store.state.authenticated = false;
+          }
+    } //einde methods
   }
 </script>
 
@@ -60,7 +57,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
 }
 #nav {
