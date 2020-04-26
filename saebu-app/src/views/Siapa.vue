@@ -2,127 +2,114 @@
   <div class="home">
   <Saebu msg="Welkom - Selamat datang"/>
   <div class="homefrm">
-    <!-- name -->
-   <b-form-group
-      id="fieldset1"
-      description=""
-      label="Wie ben jij? Siapa engkau?"
-      label-for="name"
-      :invalid-feedback="invalidFeedback"
-      :valid-feedback="validFeedback"
-      :state="state"
-  >
-                  <b-form-input id="name" :state="state" v-model.trim="name"></b-form-input>  
-  </b-form-group>
- 
- <!-- namefather -->
-   <b-form-group
-      id="fieldset2"
-      description=""
-      label="Wie is je vader? Siapa Bapakmu?"
-      label-for="namefather"
-      :invalid-feedback="invalidFeedbackF"
-      :valid-feedback="validFeedbackF"
-      :state="stateF"
-  >
+    <p v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors" :key="error">{{ error }}</li>
+      </ul>
+    </p>
 
-  <b-form-input id="namefather" :state="stateF" v-model.trim="namefather"></b-form-input>
-  </b-form-group>
-
-  <!-- namemother -->
-     <b-form-group
-      id="fieldset3"
-      description=""
-      label="Wie is je moeder? Siapa Ibumu?"
-      label-for="namemother"
-      :invalid-feedback="invalidFeedbackM"
-      :valid-feedback="validFeedbackM"
-      :state="stateM"
-  >
-    <b-form-input id="email" :state="stateE" v-model.trim="email"></b-form-input>
-  </b-form-group>
-  <!-- namemother -->
-     <b-form-group
-      id="fieldset4"
-      description=""
-      label="Je email? Emailmu?"
-      label-for="email"
-      :invalid-feedback="invalidFeedbackE"
-      :valid-feedback="validFeedbackE"
-      :state="stateM"
-  >
-    <b-form-input id="email" :state="stateE" v-model.trim="email"></b-form-input>
-  </b-form-group>
-
-        <button type="button"  class="close" data-dismiss="alert" aria-label="Close">
-               Meld me aan - Mau jadi warga
-        </button>
- 
+    <p v-if="submitted==true">
+        <b>Je aanmelding is verzonden. Je krijgt tzt een email met je login gegevens.</b>
+    </p>
+    
+  <form v-else>
+    <fieldset>
+      <legend>Vul de volgende gegevens in / Lengkapi info </legend>
+  <p>
+    <label for="name">Volledige voorna(a)m(-en) / Nama lengkap: &nbsp;</label>
+    <input
+      id="name"
+      v-model="name"
+      type="text"
+      name="name"
+    >
+  </p>
+  <p>
+    <label for="father">Naam van je vader / Nama Bapakmu: &nbsp;</label>
+    <input
+      id="father"
+      v-model="father"
+      type="text"
+      name="father"
+    >
+  </p>
+  <p>
+    <label for="mother">Naam van je moeder / Nama Ibumu: &nbsp;</label>
+    <input
+      id="mother"
+      v-model="mother"
+      type="text"
+      name="mother"
+    >
+  </p>
+  <p>
+    <label for="email">Email : &nbsp;</label>
+    <input
+      id="email"
+      v-model="email"
+      type="text"
+      name="email"
+    >
+  </p>
+    <p>
+    <input type="button" v-on:click="checkForm()" value="verzend / kirim">
+    </p>
+    </fieldset>
+  </form>
   </div>
 </div>
 </template>
 
 <script>
+const querystring = require('querystring');
+
 // @ is an alias to /src
 import Saebu from "@/components/Saebu.vue";
 
-export default {
+export default 
+{
   name: "home",
   components: {
     Saebu
   },
-computed: {
-    state () {
-      return this.name.length >= 3 ? true : false
-    },
-    stateF () {
-      return this.namefather.length >= 3 ? true : false
-    },
-    stateM () {
-      return this.namemother.length >= 3 ? true : false
-    },
-    invalidFeedback () {
-      if (this.name.length > 3) {
-        return ''
-      } else if (this.name.length > 0) {
-        return 'Minimaal 3 karakters - 3 huruf mesti'
-      } else {
-        return 'Ik wacht.. menungguin...'
+  methods: {
+     checkForm: function() {
+       this.errors = [];
+      if (!this.name || !this.father || !this.mother || !this.email) {
+        this.errors.push("Semua kotak mesti diisi / Alle velden zijn verplicht");
+        return;
       }
-    },
-    validFeedback () {
-      return this.state === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
-    },
-    validFeedbackM () {
-      return this.stateM === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
-    },
-    validFeedbackF () {
-      return this.stateF === true ? 'Was dat nou zo moeilijk? Apakah sulit?' : ''
-    },
-    invalidFeedbackF () {
-      if (this.namefather.length > 3) {
-        return ''
-      } else if (this.namefather.length > 0) {
-        return 'Minimaal 3 karakters - 3 huruf mesti'
-      } else {
-        return 'Ik wacht.. menungguin...'
-      }
-    },
-    invalidFeedbackM () {
-      if (this.namemother.length > 3) {
-        return ''
-      } else if (this.namemother.length > 0) {
-        return 'Minimaal 3 karakters - 3 huruf mesti'
-      } else {
-        return 'Ik wacht.. menungguin...'
-      }
-    }
+      axios
+      .post('http://localhost:8088/mongorestphp/register.php', querystring.stringify({
+          name : this.name,
+          father : this.father,
+          mother: this.mother,
+          email: this.email
+      }))
+      .then(response => {
+          //console.log(response);
+          if (response.data.status != "ok") {
+              this.errors.push(response.response);
+              return;
+          }
+      })
+      .catch(error => {
+          this.errors.push("Server error: " + response.reponse);
+          return;
+      });
+      this.submitted = true;
+     }
   },
-  data () {
+  data () 
+  {
     return {
+      errors: [],
       name: '',
-      namefather: '',
-      namemother: ''
+      father: '',
+      mother: '',
+      email: '',
+      submitted: false
     }
   }
 };
@@ -134,5 +121,11 @@ computed: {
   max-width: 600px;
   margin: auto;
   padding: 1em;
+}
+form input {
+  float: right;
+}
+form p > label {
+  text-align: right;
 }
 </style>

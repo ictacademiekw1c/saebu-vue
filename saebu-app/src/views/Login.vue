@@ -24,7 +24,7 @@
                 this.message = '';
                 if(this.username != "" && this.password != "") {                
                     axios
-                    .post('http://mongorest:8088/auth.php', querystring.stringify({
+                    .post('http://localhost:8088/mongorestphp/auth.php', querystring.stringify({
                         login : this.username,
                         password : this.password
                     }))

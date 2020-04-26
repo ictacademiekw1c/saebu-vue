@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home - pulang</router-link> |
       <router-link to="/about">Over - tentang kita</router-link> 
-      <router-link to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
+      <router-link v-if="!this.$parent.isAuthenticated" to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </router-link> 
       <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>

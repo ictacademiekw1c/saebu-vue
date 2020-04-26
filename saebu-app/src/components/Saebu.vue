@@ -2,10 +2,13 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      Welkom op de saebu site, wie ben je?
+      Welkom op de saebu site, wie ben je? Ben je een telg uit de familie Saebu en heb je nog geen login, dan kun je je hieronder aanmelden.
+      Je krijgt via de email een wachtwoord opgestuurd zodat je kan inloggen en jezelf kan toevoegen aan de familie Saebu stamboom. 
     </p>
     <p>
-      Selamat datang di situs keluarga Saebu, siapa engkau?
+      Selamat datang di situs keluarga Saebu, siapa engkau? Kalau engkau sesuatu warga dari keluarga, anda bisa registrasikan diri dengan formulir di bawah.
+      Setelah diisi dan dikirim engkau dapat email dengan kata sana supaya bisa antar di halaman web dan bisa melihat kita pohon keluarga, dan juga bisa 
+      bikin perubahan di pohon kalau mesti. 
     </p>
     
   </div>
