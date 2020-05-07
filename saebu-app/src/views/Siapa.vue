@@ -81,7 +81,7 @@ export default
         return;
       }
       axios
-      .post('http://localhost:8088/mongorestphp/register.php', querystring.stringify({
+      .post(this.$mongoresturl + 'register.php', querystring.stringify({
           name : this.name,
           father : this.father,
           mother: this.mother,

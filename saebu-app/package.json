@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.1",
     "jquery": "^3.4.1",
+    "less-loader": "^6.1.0",
     "vue": "^2.5.21",
     "vue-meta": "^2.2.1",
     "vue-router": "^3.0.1",

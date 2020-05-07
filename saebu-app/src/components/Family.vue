@@ -1,11 +1,15 @@
 <template>
   <div class="family">
     <h1>Familieboom | Pohon sekeluarga</h1>
-
-    <p>
-      Hier komt de familieboom.
-      </p>
-        
+      <vue2-org-tree
+        :data="tree"
+        :labelWidth="90"
+        :labelClassName="labelClass"
+        :render-content="renderContent"
+        @on-node-click="onNodeClick"
+        @on-node-mouseover="onNodeMouseOver"
+        @on-node-mouseout="onNodeMouseOut"
+      />
   </div>
 </template>
 
@@ -13,7 +17,21 @@
 export default {
   name: "Family",
   props: {
-  }
+  },
+ data() {
+      return {
+         tree: {
+          label: 'Owner',
+          children: [{
+            label: 'Label 1'
+          },{
+            label: 'Label 2'
+          },{
+            label: 'Label 3'
+          }]
+        }
+      }
+ }
 };
 </script>
 
