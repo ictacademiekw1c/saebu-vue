@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userAccount: "Anonymous",
-    authenticated: false
+    authenticated: false,
+    jwt: ""
   },
   mutations: {},
   actions: {}

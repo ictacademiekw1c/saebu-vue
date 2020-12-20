@@ -3,8 +3,9 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Secure from "./views/Secure.vue";
 import Siapa from "./views/Siapa.vue";
-import VueMeta from 'vue-meta';
+import Daftar from "./views/Daftar.vue";
 
+import VueMeta from "vue-meta";
 import store from "./store";
 
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/wiebenje",
       name: "siapakau",
       component: Siapa
+    },
+    {
+      path: "/daftar",
+      name: "Daftar",
+      component: Daftar
     },
     {
       path: "/tree",

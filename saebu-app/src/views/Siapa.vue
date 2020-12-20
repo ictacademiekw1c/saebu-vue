@@ -62,58 +62,75 @@
 </template>
 
 <script>
-const querystring = require('querystring');
+const querystring = require("querystring");
 
 // @ is an alias to /src
 import Saebu from "@/components/Saebu.vue";
 
-export default 
-{
+export default {
   name: "home",
   components: {
     Saebu
   },
+  created() {
+    this.getAuth();
+  },
   methods: {
-     checkForm: function() {
-       this.errors = [];
+    async getAuth() {
+      const { data } = await this.axios.post(
+        this.$strapiendpoint + "auth/local",
+        {
+          identifier: "abu.saebu@gmail.com",
+          password: "S~HetGaatOverRoz3nI!"
+        }
+      );
+      console.log(this.$strapiendpoint);
+      console.log(data);
+    },
+    checkForm: function() {
+      this.errors = [];
       if (!this.name || !this.father || !this.mother || !this.email) {
-        this.errors.push("Semua kotak mesti diisi / Alle velden zijn verplicht");
+        this.errors.push(
+          "Semua kotak mesti diisi / Alle velden zijn verplicht"
+        );
         return;
       }
-      axios
-      .post(this.$mongoresturl + 'register.php', querystring.stringify({
-          name : this.name,
-          father : this.father,
-          mother: this.mother,
-          email: this.email
-      }))
-      .then(response => {
-          //console.log(response);
+      this.axios
+        .post(
+          this.$mongoresturl + "register.php",
+          querystring.stringify({
+            name: this.name,
+            father: this.father,
+            mother: this.mother,
+            email: this.email
+          })
+        )
+        .then(response => {
+          console.log(response);
           if (response.data.status != "ok") {
-              this.errors.push(response.response);
-              return;
+            this.errors.push("Niet ok");
+            return;
           }
-      })
-      .catch(error => {
-          this.errors.push("Server error: " + response.reponse);
+        })
+        .catch(error => {
+          this.errors.push(error.message);
           return;
-      });
+        });
       this.submitted = true;
-     }
+    }
   },
-  data () 
-  {
+  data() {
     return {
       errors: [],
-      name: '',
-      father: '',
-      mother: '',
-      email: '',
-      submitted: false
-    }
+      name: "",
+      father: "",
+      mother: "",
+      email: "",
+      submitted: false,
+      auth: {}
+    };
   }
 };
-
 </script>
 
 <style scoped>

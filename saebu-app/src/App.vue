@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home - pulang</router-link> |
       <router-link to="/about">Over - tentang kita</router-link> 
-      <router-link v-if="!this.$parent.isAuthenticated" to="/wiebenje">| Wie ben je - Siapa engkau?</router-link> 
+      <router-link v-if="!this.$parent.isAuthenticated" to="/daftar">| Meld je aan - Mendaftermu</router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </router-link> 
       <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
@@ -14,40 +14,44 @@
 </template>
 
 <script>
-  export default {
-    name: 'App',
-    metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Familie Saebu webApp',
-      // all titles will be injected into this template
-      titleTemplate: '%s | Liefde, warmte en geborgenheid.',
-       meta: [{
-        vmid: 'description',
-        name: 'description',
-        content: 'De site van de familie Saebu, Situs keluarga Saebu di Belanda, Indonesia dan seluruh dunia. Hoe ziet de stamboom eruit, Wie zijn mijn voorouders.' 
-        }]
+export default {
+  name: "App",
+  metaInfo: {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "Familie Saebu webApp",
+    // all titles will be injected into this template
+    titleTemplate: "%s | Liefde, warmte en geborgenheid.",
+    meta: [
+      {
+        vmid: "description",
+        name: "description",
+        content:
+          "De site van de familie Saebu, Situs keluarga Saebu di Belanda, Indonesia dan seluruh dunia. Hoe ziet de stamboom eruit, Wie zijn mijn voorouders."
+      }
+    ]
+  },
+  data() {
+    return {
+      authMessage: ""
+    };
+  }, //einde data
+  computed: {
+    getJaar() {
+      var dt = new Date();
+      return dt.getFullYear();
+    }
+  }, //einde computed
+  methods: {
+    setAuthenticated(status) {
+      this.$store.state.authenticated = status;
     },
-     data() {
-            return {
-                authMessage: ""
-            }
-        }, //einde data
-    computed: {
-            getJaar() {
-                var dt = new Date();
-                return dt.getFullYear();
-            }
-          }, //einde computed
-    methods: {
-          setAuthenticated(status) {
-              this.$store.state.authenticated = status;
-          },
-          logout() {
-              this.$store.state.userAccount = "Anonymous";
-              this.$store.state.authenticated = false;
-          }
-    } //einde methods
-  }
+    logout() {
+      this.$store.state.userAccount = "Anonymous";
+      this.$store.state.authenticated = false;
+      this.$store.state.jwt = "";
+    }
+  } //einde methods
+};
 </script>
 
 <style>

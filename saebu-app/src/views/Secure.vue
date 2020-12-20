@@ -11,18 +11,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'Secure',
-        data() {
-            return {};
-        }
-    }
+export default {
+  name: "Secure",
+  data() {
+    return {};
+  }
+};
 </script>
 <style scoped>
-    #secure {
-        background-color: #FFFFFF;
-        border: 1px solid #CCCCCC;
-        padding: 20px;
-        margin-top: 10px;
-    }
+#secure {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  margin-top: 10px;
+}
 </style>

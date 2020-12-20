@@ -13,11 +13,9 @@ export default {
   components: {
     Saebu
   },
-computed: {
-  },
-  data () {
-    return {
-    }
+  computed: {},
+  data() {
+    return {};
   }
 };
 </script>

@@ -14,68 +14,65 @@
 </template>
 
 <script>
-    const querystring = require('querystring');
+//const querystring = require("querystring");
 
-    export default {
-        name: 'Login',
-        message: "",
-        methods: {
-            login() {
-                this.message = '';
-                if(this.username != "" && this.password != "") {                
-                    axios
-                    .post(this.$mongoresturl + 'auth.php', querystring.stringify({
-                        login : this.username,
-                        password : this.password
-                    }))
-                    .then(response => {
-                        //console.log(response);
-                        if (response.data.status == "ok") {
-                            this.$store.state.userAccount = this.username;
-                            this.$store.state.authenticated = true;
-                            this.$router.replace({ name: "secure" });
-                        }
-                        else {
-                            this.errors.push(response.response);
-                        }
-                    })
-                    .catch(error => {
-                        this.errors.push("Server could not authenticate");
-                    });
-                    
-                } else {
-                    
-                    this.errors.push("A username and password must be present");
-                }
-            }
-        },
-        data() {
-            return {
-                    username: "",
-                    password: "",
-                    errors: []
-            }
-        }
- 
+export default {
+  name: "Login",
+  message: "",
+  methods: {
+    getAuth(id,pw) {
+      this.axios
+        .post(this.$strapiendpoint + "auth/local", {
+          identifier: id,
+          password: pw
+        })
+        .then(response => {
+          this.$store.state.userAccount = this.username;
+          this.$store.state.authenticated = true;
+          this.$store.state.jwt = response.data.jwt;
+          this.$router.replace({ name: "secure" });
+        })
+        .catch(error => {
+          console.log(error);
+          this.errors.push("Ongeldige poging | Tidak jadi masuk ke situs");
+        });
+    },
+
+    login() {
+      this.message = "";
+      if (this.username != "" && this.password != "") {
+        this.getAuth(this.username, this.password);
+      } else {
+        this.errors.push("A username and password must be present");
+      }
     }
+  },
+  data() {
+    return {
+      username: "",
+      password: "",
+      errors: []
+    };
+  }
+};
 </script>
 
 <style scoped>
-    #login {
-        width: 500px;
-        background-color: #FFFFFF;
-        margin: auto;
-        margin-top: 200px;
-        padding: 20px;
-    }
-    #login label{
-        width: 15rem;
-    }
-    #login .msg {
-        color: green;
-        font-weight: bold;
-    }
-    ul {
-        list-style-type: none;
-    }
-    </style>
+#login {
+  width: 50vw;
+  background-color: #ffffff;
+  margin: auto;
+  margin-top: 200px;
+  padding: 20px;
+}
+#login label {
+  width: 15rem;
+}
+#login .msg {
+  color: green;
+  font-weight: bold;
+}
+ul {
+  list-style-type: none;
+}
+</style>

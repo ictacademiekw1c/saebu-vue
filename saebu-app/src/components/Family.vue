@@ -16,22 +16,25 @@
 <script>
 export default {
   name: "Family",
-  props: {
-  },
- data() {
-      return {
-         tree: {
-          label: 'Owner',
-          children: [{
-            label: 'Label 1'
-          },{
-            label: 'Label 2'
-          },{
-            label: 'Label 3'
-          }]
-        }
+  props: {},
+  data() {
+    return {
+      tree: {
+        label: "Owner",
+        children: [
+          {
+            label: "Label 1"
+          },
+          {
+            label: "Label 2"
+          },
+          {
+            label: "Label 3"
+          }
+        ]
       }
- }
+    };
+  }
 };
 </script>
 
