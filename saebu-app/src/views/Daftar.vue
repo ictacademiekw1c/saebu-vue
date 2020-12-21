@@ -1,5 +1,5 @@
 <template>
-     <div v-if="registered" id="login">
+     <div v-if="!registered" id="login">
          <h1>Meld u aan als familielid | Mendaftar anda sebagai warga keluarga</h1>
         <div  class="msg" v-if="hasError">
             <p>{{ message }}
@@ -28,6 +28,8 @@ export default {
   methods: {
     login() {
       this.message = "";
+      this.$emit("ajaxCurrentlyBusyChange", true);
+
       if (this.email != "" && this.password != "") {
         const ep = this.$strapiendpoint + "auth/local/register";
         this.axios
@@ -40,6 +42,8 @@ export default {
             // Handle success.
             console.log("User profile", response.data.user);
             this.registrationDone = true;
+            this.$emit("ajaxCurrentlyBusyChange", false);
+
           })
           .catch(error => {
             // Handle error.
@@ -47,6 +51,8 @@ export default {
             console.log(error);
             this.message =
               "Aanmelding mislukt, probeer een ander emailadres | Tidak jadi mendaftar, coba dengan alamat lain";
+            this.$emit("ajaxCurrentlyBusyChange", false);
+
           });
       } else {
         this.hasError = true;

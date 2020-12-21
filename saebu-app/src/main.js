@@ -1,11 +1,17 @@
 import "@babel/polyfill";
 import Vue from "vue";
 import "./plugins/axios";
-import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "bootstrap";
+
+import { BootstrapVue } from "bootstrap-vue";
+
+// Install BootstrapVue
+Vue.use(BootstrapVue);
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 /**************************************
 var host = location.hostname;
@@ -17,9 +23,9 @@ if (host == "localhost") {
 *****************/
 
 Vue.prototype.$strapiendpoint =
-  window.location.href.indexOf("localhost") == -1
-    ? "https://desolate-scrubland-69343.herokuapp.com/"
-    : "http://localhost:1337/";
+  location.hostname === "localhost"
+    ? "http://localhost:1337/"
+    : "https://desolate-scrubland-69343.herokuapp.com/";
 
 Vue.config.productionTip = false;
 

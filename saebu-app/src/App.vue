@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
     <div id="nav">
       <router-link to="/">Home - pulang</router-link> |
       <router-link to="/about">Over - tentang kita</router-link> 
@@ -8,14 +9,22 @@
       <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
       <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
     </div>
-     <router-view @authenticated="setAuthenticated" />
+    <router-view 
+      @authenticated="setAuthenticated"    
+      @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
+    />
      <footer>Saebu &copy;&nbsp;{{ getJaar }}  || {{ this.$store.state.userAccount }}</footer>
   </div>
 </template>
 
 <script>
+import Loadingbar from "./components/Loadingbar";
+
 export default {
   name: "App",
+  components: {
+    Loadingbar
+  },
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
     title: "Familie Saebu webApp",
@@ -32,16 +41,26 @@ export default {
   },
   data() {
     return {
-      authMessage: ""
+      authMessage: "",
+      ajaxCurrentlyBusy: false
     };
   }, //einde data
   computed: {
     getJaar() {
       var dt = new Date();
       return dt.getFullYear();
+    },
+    getBusy() {
+      return this.ajaxCurrentlyBusy;
     }
   }, //einde computed
   methods: {
+    // Listen to the ajaxCurrentlyBusy event, emitted from all around the app (other components, etc)
+    ajaxCurrentlyBusyChange: function(params) {
+      //alert(params);
+      this.ajaxCurrentlyBusy = params;
+    },
+
     setAuthenticated(status) {
       this.$store.state.authenticated = status;
     },

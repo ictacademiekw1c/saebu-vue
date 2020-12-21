@@ -1,16 +1,15 @@
 <template>
-     <div id="login">
-        <h1>Login | Pintu Masuk</h1>
-        <div  class="msg" v-if="errors.length">
-            <ul>
-                <li >{{ errors[errors.length-1] }}</li>
-            </ul>
-        </div>
-        <div><label>Naam | Nama</label>:&nbsp;<input type="text" name="username" v-model="username" placeholder="Naam | Nama" /></div>
-        <div><label>Wachtwoord | Kata sandi</label>:&nbsp;<input type="password" name="password" v-model="password" placeholder="Wachtwoord | kata sandi" /></div>
-        <div><label /><button type="button" v-on:click="login()">Login</button></div>
-        
+  <div id="login">
+    <h1>Login | Pintu Masuk</h1>
+    <div  class="msg" v-if="errors.length">
+        <ul>
+            <li >{{ errors[errors.length-1] }}</li>
+        </ul>
     </div>
+    <div><label>Naam | Nama</label>:&nbsp;<input type="text" name="username" v-model="username" placeholder="Naam | Nama" /></div>
+    <div><label>Wachtwoord | Kata sandi</label>:&nbsp;<input type="password" name="password" v-model="password" placeholder="Wachtwoord | kata sandi" /></div>
+    <div><label /><button type="button" v-on:click="login()">Login</button></div>      
+  </div>
 </template>
 
 <script>
@@ -20,7 +19,8 @@ export default {
   name: "Login",
   message: "",
   methods: {
-    getAuth(id,pw) {
+    getAuth(id, pw) {
+      this.$emit("ajaxCurrentlyBusyChange", true);
       this.axios
         .post(this.$strapiendpoint + "auth/local", {
           identifier: id,
@@ -31,9 +31,11 @@ export default {
           this.$store.state.authenticated = true;
           this.$store.state.jwt = response.data.jwt;
           this.$router.replace({ name: "secure" });
+          this.$emit("ajaxCurrentlyBusyChange", false);
         })
         .catch(error => {
           console.log(error);
+          this.$emit("ajaxCurrentlyBusyChange", false);
           this.errors.push("Ongeldige poging | Tidak jadi masuk ke situs");
         });
     },
