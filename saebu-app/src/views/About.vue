@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <h1>Saebu.nl</h1>
     <p>
       Dit is de saebu.nl site die is opgezet door Abu Saebu en toegankelijk is voor de gehele familie Saebu. <br>
@@ -12,9 +12,3 @@
       </p>
   </div>
 </template>
-
-<style scoped>
-p {
-  padding: 1em;
-}
-</style>

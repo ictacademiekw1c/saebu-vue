@@ -1,14 +1,13 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
     <p>
-      Welkom op de saebu site, wie ben je? Ben je een telg uit de familie Saebu en heb je nog geen login, dan kun je je hieronder aanmelden.
-      Je krijgt via de email een wachtwoord opgestuurd zodat je kan inloggen en jezelf kan toevoegen aan de familie Saebu stamboom. 
+      Welkom op de saebu site, wie ben je? Ben je een telg uit de familie Saebu en heb je nog geen login, dan kun je je aanmelden.
+      Zodra je je hebt geregistreerd en je emailadres hebt bevestigd kun je op de site inloggen en de familie pagina's bekijken. 
     </p>
     <p>
       Selamat datang di situs keluarga Saebu, siapa engkau? Kalau engkau sesuatu warga dari keluarga, anda bisa registrasikan diri dengan formulir di bawah.
-      Setelah diisi dan dikirim engkau dapat email dengan kata sana supaya bisa antar di halaman web dan bisa melihat kita pohon keluarga, dan juga bisa 
-      bikin perubahan di pohon kalau mesti. 
+      Setelah diisi dan dikonfirmasikan alamat email anda bisa antar di halaman web yang khusus untuk warga keluarga Saebu. 
     </p>
     
   </div>

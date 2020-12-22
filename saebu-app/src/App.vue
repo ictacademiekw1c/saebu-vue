@@ -1,29 +1,41 @@
 <template>
   <div id="app">
     <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
-    <div id="nav">
-      <router-link to="/">Home - pulang</router-link> |
-      <router-link to="/about">Over - tentang kita</router-link> 
-      <router-link v-if="!this.$parent.isAuthenticated" to="/daftar">| Meld je aan - Mendaftermu</router-link> 
-      <router-link v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </router-link> 
-      <router-link v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </router-link> 
-      <router-link v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</router-link>
-    </div>
+     <b-navbar toggleable="lg" type="dark" id="navsaebu">
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item to="/">Home - pulang</b-nav-item> |
+        <b-nav-item to="/about">Over - tentang kita</b-nav-item> 
+        <b-nav-item v-if="!this.$parent.isAuthenticated" to="/daftar">| Meld je aan - Mendaftermu</b-nav-item> 
+        <b-nav-item v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </b-nav-item> 
+
+        <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </b-nav-item> 
+        <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun"> | Familiekalender - Kalender tahunan </b-nav-item> 
+
+        <b-nav-item v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</b-nav-item>
+      </b-navbar-nav>
+      </b-collapse>
+     </b-navbar>
     <router-view 
       @authenticated="setAuthenticated"    
       @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
     />
-     <footer>Saebu &copy;&nbsp;{{ getJaar }}  || {{ this.$store.state.userAccount }}</footer>
+
+     <Footer>Saebu &copy;&nbsp;{{ getJaar }}  || {{ this.$store.state.userAccount }}</Footer>
+     
   </div>
 </template>
 
 <script>
 import Loadingbar from "./components/Loadingbar";
+import Footer from "./views/Footer";
 
 export default {
   name: "App",
   components: {
-    Loadingbar
+    Loadingbar,
+    Footer
   },
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
@@ -80,19 +92,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  max-width: 1000px;
+  max-width: 80vw;
   margin: auto;
 }
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
+#nav-collapse a.router-link-exact-active {
   color: #b33c0d;
+}
+
+#navsaebu {
+  background-color: #292354;
 }
 </style>

@@ -28,9 +28,9 @@ export default {
   methods: {
     login() {
       this.message = "";
-      this.$emit("ajaxCurrentlyBusyChange", true);
 
       if (this.email != "" && this.password != "") {
+        this.$emit("ajaxCurrentlyBusyChange", true);
         const ep = this.$strapiendpoint + "auth/local/register";
         this.axios
           .post(ep, {
@@ -79,7 +79,7 @@ export default {
   margin-top: 200px;
   background-color: #ffffff;
   margin: auto;
-  margin-top: 0px;
+  margin-top: 100px;
   padding: 20px;
 }
 #login label {
