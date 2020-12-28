@@ -16,6 +16,7 @@
     "vue": "^2.5.21",
     "vue-meta": "^2.2.1",
     "vue-router": "^3.0.1",
+    "vue-tippy": "^4.7.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

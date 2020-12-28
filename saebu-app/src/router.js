@@ -71,6 +71,16 @@ let router = new Router({
       }
     },
     {
+      path: "/logout",
+      name: "logout",
+      beforeEnter: (to, from, next) => {
+        store.state.userAccount = "Anonymous";
+        store.state.authenticated = false;
+        store.state.jwt = "";
+        next({ path: "/login" });
+      }
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting

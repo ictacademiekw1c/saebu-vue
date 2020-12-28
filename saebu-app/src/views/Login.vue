@@ -64,8 +64,6 @@ export default {
   width: 50vw;
   background-color: #ffffff;
   margin: auto;
-  margin-top: 100px;
-  padding: 20px;
 }
 #login label {
   width: 15rem;

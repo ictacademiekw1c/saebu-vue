@@ -1,29 +1,41 @@
 <template>
   <div id="app">
     <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
-     <b-navbar toggleable="lg" type="dark" id="navsaebu">
+    <b-navbar toggleable="lg" type="dark" id="navsaebu">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <b-nav-item to="/">Home - pulang</b-nav-item> |
-        <b-nav-item to="/about">Over - tentang kita</b-nav-item> 
-        <b-nav-item v-if="!this.$parent.isAuthenticated" to="/daftar">| Meld je aan - Mendaftermu</b-nav-item> 
-        <b-nav-item v-if="!this.$parent.isAuthenticated" to="/login">| Login - Pintu masuk </b-nav-item> 
+        <b-navbar-nav>
+          <b-nav-item to="/">Home - pulang</b-nav-item> |
+          <b-nav-item to="/about">Over - tentang kita</b-nav-item>
+          <b-nav-item v-if="!this.$parent.isAuthenticated" to="/daftar"
+            >| Meld je aan - Mendaftermu</b-nav-item
+          >
+          <b-nav-item v-if="!this.$parent.isAuthenticated" to="/login"
+            >| Login - Pintu masuk
+          </b-nav-item>
 
-        <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree"> | Familieboom - Pohon sekeluarga </b-nav-item> 
-        <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun"> | Familiekalender - Kalender tahunan </b-nav-item> 
+          <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree">
+            | Familieboom - Pohon sekeluarga
+          </b-nav-item>
+          <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun">
+            | Familiekalender - Kalender tahunan
+          </b-nav-item>
 
-        <b-nav-item v-if="this.$parent.isAuthenticated" to="/login" v-on:click.native="logout()" replace>| Logout - Henti sesi</b-nav-item>
-      </b-navbar-nav>
+          <b-nav-item v-if="this.$parent.isAuthenticated" to="/logout"
+            >| Logout - Henti sesi</b-nav-item
+          >
+        </b-navbar-nav>
       </b-collapse>
-     </b-navbar>
-    <router-view 
-      @authenticated="setAuthenticated"    
+    </b-navbar>
+    <router-view
+      @authenticated="setAuthenticated"
       @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
     />
 
-     <Footer>Saebu &copy;&nbsp;{{ getJaar }}  || {{ this.$store.state.userAccount }}</Footer>
-     
+    <Footer
+      >Saebu &copy;&nbsp;{{ getJaar }} ||
+      {{ this.$store.state.userAccount }}</Footer
+    >
   </div>
 </template>
 
@@ -75,11 +87,6 @@ export default {
 
     setAuthenticated(status) {
       this.$store.state.authenticated = status;
-    },
-    logout() {
-      this.$store.state.userAccount = "Anonymous";
-      this.$store.state.authenticated = false;
-      this.$store.state.jwt = "";
     }
   } //einde methods
 };
@@ -90,9 +97,9 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
-  max-width: 80vw;
+  max-width: 90vw;
   margin: auto;
 }
 
@@ -102,5 +109,10 @@ export default {
 
 #navsaebu {
   background-color: #292354;
+}
+
+h1,
+p {
+  padding: 0.5em 10em 0.5em 0.2em;
 }
 </style>
