@@ -38,14 +38,6 @@ let router = new Router({
       }
     },
     {
-      path: "/wiebenje",
-      name: "siapakau",
-      component: Siapa,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
       path: "/daftar",
       name: "Daftar",
       component: Daftar,
@@ -74,9 +66,9 @@ let router = new Router({
       path: "/logout",
       name: "logout",
       beforeEnter: (to, from, next) => {
-        store.state.userAccount = "Anonymous";
         store.state.authenticated = false;
         store.state.jwt = "";
+        store.state.userLoggedIn = null;
         next({ path: "/login" });
       }
     },

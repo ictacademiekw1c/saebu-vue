@@ -32,10 +32,7 @@
       @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
     />
 
-    <Footer
-      >Saebu &copy;&nbsp;{{ getJaar }} ||
-      {{ this.$store.state.userAccount }}</Footer
-    >
+    <Footer :message="getFooterLine" :mention="userNow" />
   </div>
 </template>
 
@@ -70,9 +67,16 @@ export default {
     };
   }, //einde data
   computed: {
-    getJaar() {
+    userNow() {
+      return this.$store.state.userLoggedin.username;
+    },
+    getFooterLine() {
       var dt = new Date();
-      return dt.getFullYear();
+      return (
+        "Saebu familie website | Keluarga Saebu situs " +
+        dt.getFullYear() +
+        " | &copy; Abu Saebu"
+      );
     },
     getBusy() {
       return this.ajaxCurrentlyBusy;
@@ -84,7 +88,6 @@ export default {
       //alert(params);
       this.ajaxCurrentlyBusy = params;
     },
-
     setAuthenticated(status) {
       this.$store.state.authenticated = status;
     }

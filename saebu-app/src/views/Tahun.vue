@@ -9,35 +9,37 @@
     ></Calendar>
 
     <b-modal
-      :title="currentId != null ? 'Wijzig verjaardag' : 'Voeg verjaardag toe'"
-      ok-title="Bewaar"
+      :title="'Verjaardag | Hari ulang tahun'"
+      ok-title="Bewaar | Simpang"
       v-model="show"
       @ok="saveBirthday"
     >
       <form class="form-horizontal">
         <div class="form-group row">
           <label for="event-name" class="col-sm-2 control-label"
-            >Naam | Nama lengkap</label
+            >Voornaam | Nama pertama</label
           >
           <div class="col-sm-10">
             <input
               id="event-name"
               type="text"
+              placeholder="Wie is er jarig | Siapa HUT"
               class="form-control"
-              v-model="currentName"
+              v-model="member.firstname"
             />
           </div>
         </div>
         <div class="form-group row">
-          <label for="event-location" class="col-sm-2 control-label"
-            >Geboren in</label
+          <label for="birthplace" class="col-sm-2 control-label"
+            >Geboren te | Lahir di</label
           >
           <div class="col-sm-10">
             <input
-              id="event-location"
+              id="birthplace"
+              placeholder="Geboorteplaats | Lahir di mana"
               type="text"
               class="form-control"
-              v-model="currentLocation"
+              v-model="member.birthplace"
             />
           </div>
         </div>
@@ -48,11 +50,26 @@
           <div class="col-sm-10">
             <div class="input-group input-daterange">
               <input
-                id="min-date"
-                type="date"
+                id="day"
+                type="number"
                 class="form-control"
-                v-model="birthdayDate"
+                v-model="member.birthdate_dd"
+                disabled
               />
+              <input
+                id="month"
+                type="number"
+                class="form-control"
+                v-model="member.birthdate_mm"
+                disabled
+              />
+              <input
+                id="year"
+                type="number"
+                class="form-control"
+                v-model="member.birthdate_yy"
+              />
+              <input id="year" type="hidden" v-model="member.birthdate" />
             </div>
           </div>
         </div>
@@ -68,28 +85,36 @@ import { tippy } from "vue-tippy";
 export default {
   components: {
     Calendar,
+    // eslint-disable-next-line vue/no-unused-components
     tippy
   },
   data() {
     return {
       tooltip: null,
       show: false,
-      currentName: null,
-      birthdayDate: null
+      member: {
+        firstname: null,
+        birthplace: null,
+        birthdate_dd: null,
+        birthdate_mm: null,
+        birthdate_yy: null,
+        birthdate: null
+      }
     };
   },
   methods: {
     getDataSource: function() {
       return [
         {
-          startDate: new Date("2020/12/28"),
-          endDate: new Date("2020/12/28"),
+          startDate: new Date("2021/12/28"),
+          endDate: new Date("2021/12/28"),
           name: "Pietje",
+          location: "Tante Jetje",
           details: "Geboren in 1988"
         },
         {
-          startDate: new Date("2020/12/29"),
-          endDate: new Date("2020/12/29"),
+          startDate: new Date("2021/12/29"),
+          endDate: new Date("2021/12/29"),
           name: "Jacky Potetie",
           location: "Waar geboren",
           details: "Geboren in 1989"
@@ -112,18 +137,47 @@ export default {
           return [];
       *****/
     },
+    saveBirthday() {
+      this.$emit("ajaxCurrentlyBusyChange", true);
+      this.member.birthdate = [
+        this.member.birthdate_yy,
+        this.member.birthdate_mm,
+        this.member.birthdate_dd
+      ].join("-");
+
+      this.axios
+        .post(this.$strapiendpoint + "members", {
+          //data: {
+          firstname: this.member.firstname,
+          birthplace: this.member.birthplace,
+          birthdate: this.member.birthdate,
+          //},
+          //authorisatie is nog even uitgezet, later nog eens fixen
+          headers: {
+            Authorization: "Bearer " + this.$store.state.jwt
+          }
+        })
+        .then(response => {
+          console.log(response.data.id);
+          this.$emit("ajaxCurrentlyBusyChange", false);
+        })
+        .catch(error => {
+          this.$emit("ajaxCurrentlyBusyChange", false);
+          console.log(error.message);
+          alert("Maaf tidak disimpang");
+        });
+    },
     addBirthday(evt) {
       this.show = true;
-      this.currentName = "Jarige job";
-      //console.log(evt.date.toLocaleDateString());
       var d = evt.date;
-      var month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
+      this.member.birthdate_mm = "" + (d.getMonth() + 1);
+      this.member.birthdate_dd = "" + d.getDate();
+      this.member.birthdate_yy = d.getFullYear();
 
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
-      this.birthdayDate = [year, month, day].join("-");
+      if (this.member.birthdate_mm.length < 2)
+        this.member.birthdate_mm = "0" + this.member.birthdate_mm;
+      if (this.member.birthdate_dd.length < 2)
+        this.member.birthdate_dd = "0" + this.member.birthdate_dd;
     },
     mouseOnDay: function(e) {
       if (e.events.length > 0) {

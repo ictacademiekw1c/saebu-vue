@@ -81,7 +81,7 @@ export default {
         this.$strapiendpoint + "auth/local",
         {
           identifier: "abu.saebu@gmail.com",
-          password: "S~HetGaatOverRoz3nI!"
+          password: ""
         }
       );
       console.log(this.$strapiendpoint);

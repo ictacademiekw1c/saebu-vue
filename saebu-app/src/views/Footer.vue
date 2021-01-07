@@ -2,11 +2,11 @@
   <div id="container">
     <div id="contacts">
       <div id="contacts--contact">
-        <p>{{ message }}</p>
+        <p v-html="message"></p>
       </div>
     </div>
     <div id="mentions">
-      <p>{{ mention }}</p>
+      <p>Selamat {{ mention }}</p>
     </div>
    </div>
 </template>
@@ -14,12 +14,7 @@
 <script>
 export default {
   name: "Footer",
-  data() {
-    return {
-        message: "De familie Saebu App | App keturunan keluarga Saebu",
-        mention: "2020 | Abu Saebu"
-    };
-  }
+  props: ["message", "mention"]
 };
 </script>
 

@@ -13,18 +13,18 @@
       waar je heel makkelijk je leven kan delen met iedereen, maar waar het
       gevaar van de surveillance kapitalisme loert. Hoe meer je deelt op
       internet hoe beter word je geprofileerd door de AI machines en word je
-      gemanipuleerd in je gedrag, in je aankopen en in je meningen.
-
-      Buiten de grijparmen van de surveillance kapitalisme heb ik onderstaande
-      tools voor ieder familielid op mijn planning staan:
-      <ul>
-        <li>Verjaardagskalender</li>
-        <li>Familieboomstam</li>
-        <li>Receptenboeken</li>
-        <li>Wie zit waar (wereldkaart)?</li>
-        <li>Wat eten we vandaag</li>
-      </ul>
+      gemanipuleerd in je gedrag, in je aankopen en in je meningen. Buiten de
+      grijparmen van de surveillance kapitalisme heb ik onderstaande tools voor
+      ieder familielid op mijn planning staan:
     </p>
+    <ul>
+      <li>Verjaardagskalender</li>
+      <li>Familieboomstam</li>
+      <li>Receptenboeken</li>
+      <li>Wie zit waar (wereldkaart)?</li>
+      <li>Wat eten we vandaag</li>
+    </ul>
+
     <p>
       Selamat datang di situs keluarga Saebu, siapa engkau? Kalau engkau sesuatu
       warga dari keluarga, anda bisa registrasikan diri dengan formulir di
