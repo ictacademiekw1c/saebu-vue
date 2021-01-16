@@ -9,6 +9,17 @@ export default new Vuex.Store({
     jwt: "",
     userLoggedin: { username: "Anda Siapa?" }
   },
-  mutations: {},
+  getters: {
+    userNow: state => {
+      return state.userLoggedin.username;
+    }
+  },
+  mutations: {
+    changeUserState(state) {
+      state.authenticated = false;
+      state.jwt = "";
+      state.userLoggedin = { id: null, username: "Anda Siapa?" };
+    }
+  },
   actions: {}
 });

@@ -30,15 +30,18 @@
     <router-view
       @authenticated="setAuthenticated"
       @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
+      @forceRerender="reRender"
     />
-
-    <Footer :message="getFooterLine" :mention="userNow" />
+    <!-- key is nodig om een rerender te doen bij wijziging van userNow -->
+    <Footer :message="getFooterLine" :mention="userNow" :key="userNow" />
   </div>
 </template>
 
 <script>
 import Loadingbar from "./components/Loadingbar";
 import Footer from "./views/Footer";
+import { mapGetters } from "vuex";
+
 
 export default {
   name: "App",
@@ -67,9 +70,7 @@ export default {
     };
   }, //einde data
   computed: {
-    userNow() {
-      return this.$store.state.userLoggedin.username;
-    },
+    ...mapGetters(["userNow"]),
     getFooterLine() {
       var dt = new Date();
       return (

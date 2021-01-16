@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Secure from "./views/Secure.vue";
-import Siapa from "./views/Siapa.vue";
+
 import Selamat from "./views/Selamat.vue";
 import Daftar from "./views/Daftar.vue";
 import Tahun from "./views/Tahun.vue";
@@ -66,9 +66,10 @@ let router = new Router({
       path: "/logout",
       name: "logout",
       beforeEnter: (to, from, next) => {
-        store.state.authenticated = false;
-        store.state.jwt = "";
-        store.state.userLoggedIn = null;
+        //store.state.authenticated = false;
+        //store.state.jwt = "";
+        //store.state.userLoggedIn = null;
+        store.commit("changeUserState");
         next({ path: "/login" });
       }
     },

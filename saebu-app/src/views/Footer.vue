@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Footer",
   props: ["message", "mention"]

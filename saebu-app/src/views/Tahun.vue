@@ -103,41 +103,38 @@ export default {
     };
   },
   methods: {
-    getDataSource: function() {
-      return [
-        {
-          startDate: new Date("2021/12/28"),
-          endDate: new Date("2021/12/28"),
-          name: "Pietje",
-          location: "Tante Jetje",
-          details: "Geboren in 1988"
-        },
-        {
-          startDate: new Date("2021/12/29"),
-          endDate: new Date("2021/12/29"),
-          name: "Jacky Potetie",
-          location: "Waar geboren",
-          details: "Geboren in 1989"
-        }
-      ];
+    getDataSource: function(year) {
+      return (
+        this.axios
+          .get(this.$strapiendpoint + "members", {})
+          //.then(result => JSON.stringify(result))
+          .then(result => {
+            if (result.data) {
+              year = !year ? new Date().getFullYear() : year;
+              result.data.forEach(element => {
+                element.birthyear = element.birthdate.split("-")[0];
+                element.birthdate = new Date(
+                  year,
+                  element.birthdate.split("-")[1],
+                  element.birthdate.split("-")[2]
+                );
+                element.birthyear =
+                  element.birthyear == undefined ? "?" : element.birthyear;
+                console.log(element);
 
-      /*****
-      fetch(`https://api.github.com/search/issues?q=repo:Paul-DS/bootstrap-year-calendar%20created:${year}-01-01..${year}-12-31`)
-        .then(result => result.json())
-        .then(result => {
-          if (result.items) {
-            return result.items.map(r => ({
-              startDate: new Date(r.created_at),
-              endDate: new Date(r.created_at),
-              name: '#' + r.number + ' - ' + r.title,
-              details: r.comments + ' comments'
-            }));
-          }
-
-          return [];
-      *****/
+              });
+              return result.data.map(r => ({
+                startDate: new Date(r.birthdate),
+                endDate: new Date(r.birthdate),
+                name: r.firstname,
+                details:
+                  "Geboren|Lahir di " + r.birthplace + " in|di " + r.birthyear
+              }));
+            }
+          })
+      );
     },
-    saveBirthday() {
+    saveBirthday: function() {
       this.$emit("ajaxCurrentlyBusyChange", true);
       this.member.birthdate = [
         this.member.birthdate_yy,

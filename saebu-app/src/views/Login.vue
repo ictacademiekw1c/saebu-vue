@@ -34,6 +34,9 @@
 export default {
   name: "Login",
   message: "",
+  created() {
+    this.$emit("forceRerender");
+  },
   methods: {
     getAuth(id, pw) {
       this.$emit("ajaxCurrentlyBusyChange", true);
