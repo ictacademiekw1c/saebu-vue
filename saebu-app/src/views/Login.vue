@@ -23,7 +23,7 @@
       />
     </div>
     <div>
-      <label /><button type="button" v-on:click="login()">Login</button>
+      <label /><b-button type="button" v-on:click="login()">Login</b-button>
     </div>
   </div>
 </template>
@@ -79,11 +79,6 @@ export default {
 </script>
 
 <style scoped>
-#login {
-  width: 50vw;
-  background-color: #ffffff;
-  margin: auto;
-}
 #login label {
   width: 15rem;
 }

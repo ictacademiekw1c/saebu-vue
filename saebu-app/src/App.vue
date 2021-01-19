@@ -1,39 +1,44 @@
 <template>
   <div id="app">
-    <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
-    <b-navbar toggleable="lg" type="dark" id="navsaebu">
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/">Home - pulang</b-nav-item> |
-          <b-nav-item to="/about">Over - tentang kita</b-nav-item>
-          <b-nav-item v-if="!this.$parent.isAuthenticated" to="/daftar"
-            >| Meld je aan - Mendaftermu</b-nav-item
-          >
-          <b-nav-item v-if="!this.$parent.isAuthenticated" to="/login"
-            >| Login - Pintu masuk
-          </b-nav-item>
+    <b-container fluid>
+      <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
+      <b-navbar toggleable="lg" type="dark" id="navsaebu">
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item to="/">Home - pulang</b-nav-item>
+            <b-nav-item to="/about">Over - tentang kita</b-nav-item>
+            <b-nav-item v-if="!this.$parent.isAuthenticated" to="/daftar"
+              >Meld je aan - Mendaftermu</b-nav-item
+            >
+            <b-nav-item v-if="!this.$parent.isAuthenticated" to="/login"
+              >Login - Pintu masuk
+            </b-nav-item>
 
-          <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree">
-            | Familieboom - Pohon sekeluarga
-          </b-nav-item>
-          <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun">
-            | Familiekalender - Kalender tahunan
-          </b-nav-item>
+            <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree">
+              Familieboom - Pohon sekeluarga
+            </b-nav-item>
+            <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun">
+              Familiekalender - Kalender tahunan
+            </b-nav-item>
 
-          <b-nav-item v-if="this.$parent.isAuthenticated" to="/logout"
-            >| Logout - Henti sesi</b-nav-item
-          >
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-    <router-view
-      @authenticated="setAuthenticated"
-      @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
-      @forceRerender="reRender"
-    />
-    <!-- key is nodig om een rerender te doen bij wijziging van userNow -->
-    <Footer :message="getFooterLine" :mention="userNow" :key="userNow" />
+            <b-nav-item v-if="this.$parent.isAuthenticated" to="/logout"
+              >Logout - Henti sesi</b-nav-item
+            >
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+      <aside>
+        <img src="@/assets/footer.jpg">
+      </aside>
+      <router-view
+        @authenticated="setAuthenticated"
+        @ajaxCurrentlyBusyChange="ajaxCurrentlyBusyChange"
+        @forceRerender="reRender"
+      />
+      <!-- key is nodig om een rerender te doen bij wijziging van userNow -->
+      <Footer :message="getFooterLine" :mention="userNow" :key="userNow" />
+    </b-container>
   </div>
 </template>
 
@@ -41,7 +46,6 @@
 import Loadingbar from "./components/Loadingbar";
 import Footer from "./views/Footer";
 import { mapGetters } from "vuex";
-
 
 export default {
   name: "App",
@@ -97,26 +101,77 @@ export default {
 </script>
 
 <style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #2c3e50;
-  max-width: 90vw;
-  margin: auto;
+  color: #fff;
 }
 
-#nav-collapse a.router-link-exact-active {
-  color: #b33c0d;
+.container-fluid { 
+  background-position: 70% top;
+  background-repeat: no-repeat;
+  background: rgb(97, 66, 36);
+  background: linear-gradient(90deg, rgba(97,66,36,1) 6%, rgba(141,122,58,1) 44%, rgba(179,166,114,1) 100%);
 }
 
-#navsaebu {
-  background-color: #292354;
+aside img {
+  display: none;
+}
+
+figure img {
+  float: left;
+  margin: 0.5em 1em 0.5em 1em;
+  height: 200px;
+}
+
+
+@media only screen and (min-width: 600px) {
+  .container-fluid {
+    min-height: 900px;
+  }
+  aside img {
+    display: block;
+    float: right;
+  }
+  figure img {
+    height: 50vh;
+    float: left;
+    margin: 0.5em 1em 0.5em 1em;
+}
+
+}
+
+h1 {
+  color: #f3b43f;
+}
+
+h2 {
+  color: #b3a394;
 }
 
 h1,
 p {
-  padding: 0.5em 10em 0.5em 0.2em;
+  padding: 0.5em;
+}
+
+#nav-collapse a.router-link-exact-active {
+  color: #f3b43f;
+  font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #f3b43f;
+}
+
+#navsaebu {
+  background-color: #102542;
 }
 </style>

@@ -44,11 +44,6 @@
 </template>
 
 <style scoped>
-figure img {
-  height: 50vh;
-  float: left;
-  margin: 0.5em 1em 0.5em 1em;
-}
 
 p {
   padding-left: 0.5em;

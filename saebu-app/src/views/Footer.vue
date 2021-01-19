@@ -20,24 +20,15 @@ export default {
 </script>
 
 <style scoped>
-
-body {
-  display: flex;
-  background-color: #f0f8ff;
-  height: 95vh;
-  justify-content: center;
-  align-items: flex-end;
-}
-
 #container {
   padding-top: 20px;
   margin-top: 20px;
-  width: 90vw;
-  color: white;
-  background-color: #292354;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #f3b43f;
+  background-color: #102542;
 }
 #contacts {
   display: flex;
@@ -61,5 +52,6 @@ body {
 }
 #mentions p {
   font-size: 0.8em;
+  text-align: center;
 }
 </style>
