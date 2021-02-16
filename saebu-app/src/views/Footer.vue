@@ -30,6 +30,26 @@ export default {
   color: #f3b43f;
   background-color: #102542;
 }
+
+#container:hover {
+  animation: hideanim 10s ease;
+}
+
+@keyframes hideanim {
+  0% {
+    height: 10em;
+  }
+  50% {
+    height: 2.8em;
+  }
+  60% {
+    height: 0.1em;
+  }
+  100% {
+    height: 0em;
+  }
+}
+
 #contacts {
   display: flex;
   justify-content: space-around;

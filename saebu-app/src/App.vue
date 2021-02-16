@@ -116,6 +116,7 @@ export default {
 }
 
 .container-fluid { 
+  min-height: call(100vh);
   background-position: 70% top;
   background-repeat: no-repeat;
   background: rgb(97, 66, 36);
@@ -133,16 +134,17 @@ figure img {
 }
 
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
   .container-fluid {
-    min-height: 900px;
+    min-height: 1000px;
   }
   aside img {
     display: block;
     float: right;
   }
   figure img {
-    height: 50vh;
+    max-width: 33%;
+    max-height: 50vh;
     float: left;
     margin: 0.5em 1em 0.5em 1em;
 }

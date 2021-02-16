@@ -4,35 +4,49 @@
     <div class="msg" v-if="hasError">
       <p>{{ message }}</p>
     </div>
-    <div>
-      <label>Naam | Namah:</label>&nbsp;<input
-        type="text"
-        name="username"
-        v-model="username"
-        placeholder="Username | Nama"
-      />
-    </div>
-    <div>
-      <label>Email:</label>&nbsp;<input
-        type="text"
-        name="email"
-        v-model="email"
-        placeholder="Email"
-      />
-    </div>
-    <div>
-      <label>Wachtwoord | Kata sandi:</label>&nbsp;<input
-        type="password"
-        name="password"
-        v-model="password"
-        placeholder="Wachtwoord | kata sandi"
-      />
-    </div>
-    <div>
-      <label /><b-button type="button" v-on:click="login()">
-        Verzend | Kirim
-      </b-button>
-    </div>
+    <form @submit.prevent="onSubmit">
+      <div>
+        <label>Naam | Namah:</label>&nbsp;<input
+          type="text"
+          name="username"
+          v-model="username"
+          placeholder="Username | Nama"
+        />
+      </div>
+      <div>
+        <label>Email:</label>&nbsp;<input
+          type="text"
+          name="email"
+          v-model="email"
+          placeholder="Email"
+        />
+      </div>
+      <div>
+        <label>Wachtwoord | Kata sandi:</label>&nbsp;<input
+          type="password"
+          name="password"
+          v-model="password"
+          placeholder="Wachtwoord | kata sandi"
+        />
+      </div>
+      <div>
+        <div id="recaptcha">
+          <vue-recaptcha
+            @verify="onVerify"
+            @expired="onExpired"
+            :loadRecaptchaScript="true"
+            sitekey="6LcZjVoaAAAAAA1So3w0WQb8SnhE0eSuFvaD6D0S"
+          >
+          </vue-recaptcha>
+        </div>
+      </div>
+      <div>
+        <label />
+        <b-button type="submit">
+          Verzend | Kirim
+        </b-button>
+      </div>
+    </form>
   </div>
   <div v-else>
     <h2>Gelukt | Jadi</h2>
@@ -44,17 +58,38 @@
 </template>
 
 <script>
+import VueRecaptcha from "vue-recaptcha";
 export default {
   name: "Daftar",
+  components: { VueRecaptcha },
   computed: {
     registered() {
       return this.registrationDone;
     }
   },
+  data() {
+    return {
+      noRobot: false
+    };
+  },
   methods: {
-    login() {
-      this.message = "";
+    onSubmit: function() {
+      this.register();
+    },
+    onVerify: function() {
+      this.noRobot = true;
+    },
+    onExpired: function() {
+      console.log("Expired");
+    },
+    register() {
+      if (!this.noRobot) {
+        this.message =
+          "Engkau bukan manusia tetapi mesin. | Bewijs dat je geen robot bent.";
+        return;
+      }
 
+      this.message = "";
       if (this.email != "" && this.password != "") {
         this.$emit("ajaxCurrentlyBusyChange", true);
         const ep = this.$strapiendpoint + "auth/local/register";
@@ -105,7 +140,7 @@ export default {
   width: 15rem;
 }
 #login .msg {
-  color: green;
+  color: red;
   font-weight: bold;
 }
 ul {

@@ -69,7 +69,7 @@
                 class="form-control"
                 v-model="member.birthdate_yy"
               />
-              <input id="year" type="hidden" v-model="member.birthdate" />
+              <input id="yearyear" type="hidden" v-model="member.birthdate" />
             </div>
           </div>
         </div>
@@ -115,13 +115,12 @@ export default {
                 element.birthyear = element.birthdate.split("-")[0];
                 element.birthdate = new Date(
                   year,
-                  element.birthdate.split("-")[1],
+                  element.birthdate.split("-")[1] - 1,
                   element.birthdate.split("-")[2]
                 );
                 element.birthyear =
                   element.birthyear == undefined ? "?" : element.birthyear;
                 console.log(element);
-
               });
               return result.data.map(r => ({
                 startDate: new Date(r.birthdate),
@@ -136,6 +135,16 @@ export default {
     },
     saveBirthday: function() {
       this.$emit("ajaxCurrentlyBusyChange", true);
+      this.member.birthdate_yy *= 1;
+      if (
+        this.member.birthdate_yy < 1900 ||
+        this.member.birthdate_yy > new Date().getFullYear()
+      ) {
+        this.$emit("ajaxCurrentlyBusyChange", false);
+        console.log("Jaar niet ok");
+        alert("Tahun yang diisi tidak baik");
+        return;
+      }
       this.member.birthdate = [
         this.member.birthdate_yy,
         this.member.birthdate_mm,
