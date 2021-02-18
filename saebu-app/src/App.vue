@@ -47,11 +47,12 @@ import Loadingbar from "./components/Loadingbar";
 import Footer from "./views/Footer";
 import { mapGetters } from "vuex";
 
+
 export default {
   name: "App",
   components: {
     Loadingbar,
-    Footer
+    Footer,
   },
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
@@ -95,6 +96,9 @@ export default {
     },
     setAuthenticated(status) {
       this.$store.state.authenticated = status;
+    },
+    reRender() {
+      console.log("reRender?");
     }
   } //einde methods
 };

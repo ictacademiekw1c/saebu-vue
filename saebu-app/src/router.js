@@ -57,7 +57,7 @@ let router = new Router({
       path: "/tree",
       name: "tree",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Tree.vue"),
+        import(/* webpackChunkName: "about" */ "./views/Pohon.vue"),
       meta: {
         requiresAuth: true
       }
