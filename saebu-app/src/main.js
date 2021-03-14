@@ -12,10 +12,8 @@ import VueTippy from "vue-tippy";
 Vue.use(BootstrapVue);
 Vue.use(VueTippy);
 
-
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import "vis-network/dist/vis-network.css";
 
 /**************************************
 var host = location.hostname;

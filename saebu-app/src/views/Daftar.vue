@@ -67,11 +67,6 @@ export default {
       return this.registrationDone;
     }
   },
-  data() {
-    return {
-      noRobot: false
-    };
-  },
   methods: {
     onSubmit: function() {
       this.register();
@@ -126,7 +121,8 @@ export default {
       password: "",
       message: "",
       registrationDone: false,
-      hasError: false
+      hasError: false,
+      noRobot: false
     };
   }
 };
