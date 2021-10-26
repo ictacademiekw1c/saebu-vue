@@ -38,6 +38,16 @@ let router = new Router({
       }
     },
     {
+      path: "/lupa",
+      name: "lupa",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Lupa.vue"),
+      meta: {
+        requiresAuth: false
+      }
+    },
+
+    {
       path: "/daftar",
       name: "Daftar",
       component: Daftar,

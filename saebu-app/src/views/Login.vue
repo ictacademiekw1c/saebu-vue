@@ -7,7 +7,7 @@
       </ul>
     </div>
     <div>
-      <label>Naam | Nama</label>:&nbsp;<input
+      <label>E-mail | Email anda</label>:&nbsp;<input
         type="text"
         name="username"
         v-model="username"
@@ -24,6 +24,7 @@
     </div>
     <div>
       <label /><b-button type="button" v-on:click="login()">Login</b-button>
+      <b-nav-item to="/lupa">Wachtwoord vergeten| Lupa kata sandi</b-nav-item>
     </div>
   </div>
 </template>
