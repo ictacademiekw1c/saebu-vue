@@ -43,19 +43,19 @@ export default {
     };
   },
   methods: {
-    labelClass(data) {
+    labelClass(_data) {
       return "bg_node";
     },
-    renderContent(h, data) {
+    renderContent(_h, data) {
       return data.label;
     },
-    onNodeClick(e, data) {
+    onNodeClick(e, _data) {
       console.log("CLICK", e);
     },
-    onNodeMouseOver(e, data) {
+    onNodeMouseOver(_e, _data) {
       console.log("MOUSE OVER - ");
     },
-    onNodeMouseOut(e, data) {
+    onNodeMouseOut(e, _data) {
       console.log("MOUSEOUT", e);
     }
   }

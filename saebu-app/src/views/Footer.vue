@@ -21,8 +21,8 @@ export default {
 
 <style scoped>
 #container {
-  padding-top: 20px;
-  margin-top: 20px;
+  padding-top: 10px;
+  margin-top: 10px;
   position: fixed;
   left: 0;
   bottom: 0;

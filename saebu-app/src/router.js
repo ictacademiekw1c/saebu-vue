@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Secure from "./views/Secure.vue";
 
 import Selamat from "./views/Selamat.vue";
+import Sandibaru from "./views/Sandibaru.vue";
 import Daftar from "./views/Daftar.vue";
 import Tahun from "./views/Tahun.vue";
 
@@ -38,6 +39,14 @@ let router = new Router({
       }
     },
     {
+      path: "/sandibaru",
+      name: "Sandibaru",
+      component: Sandibaru,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: "/lupa",
       name: "lupa",
       component: () =>
@@ -46,7 +55,6 @@ let router = new Router({
         requiresAuth: false
       }
     },
-
     {
       path: "/daftar",
       name: "Daftar",

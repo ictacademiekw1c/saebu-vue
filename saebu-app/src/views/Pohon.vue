@@ -111,16 +111,22 @@ export default {
         }
       };
       //familieleden ophalen
-      this.axios.get(this.$strapiendpoint + "members", {}).then(result => {
-        if (result.data) {
-          result.data.forEach(member => {
-            this.network.nodes.push({
-              id: member._id,
-              label: member.firstname
+      this.axios
+        .get(this.$strapiendpoint + "members", {
+          headers: {
+            Authorization: "Bearer " + this.$store.state.jwt
+          }
+        })
+        .then(result => {
+          if (result.data) {
+            result.data.forEach(member => {
+              this.network.nodes.push({
+                id: member._id,
+                label: member.firstname
+              });
             });
-          });
-        }
-      });
+          }
+        });
       //relaties ophalen
       this.axios.get(this.$strapiendpoint + "pairs", {}).then(result => {
         if (result.data) {
@@ -276,7 +282,7 @@ export default {
 }
 
 .wrapper {
-  padding: 20px 50px;
+  padding: 0px;
   text-align: center;
 }
 .events {
@@ -285,7 +291,7 @@ export default {
 }
 
 .network {
-  height: 70vh;
+  height: 100vh;
 }
 canvas {
   position: absolute;

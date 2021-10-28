@@ -106,7 +106,11 @@ export default {
     getDataSource: function(year) {
       return (
         this.axios
-          .get(this.$strapiendpoint + "members", {})
+          .get(this.$strapiendpoint + "members", {
+            headers: {
+              Authorization: "Bearer " + this.$store.state.jwt
+            }
+          })
           //.then(result => JSON.stringify(result))
           .then(result => {
             if (result.data) {

@@ -4,6 +4,8 @@
       <Loadingbar :ajaxCurrentlyBusy="getBusy"></Loadingbar>
       <b-navbar toggleable="lg" type="dark" id="navsaebu">
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-brand tag="h1" class="mb-0" right>saebu.nl | </b-navbar-brand>
+ 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item to="/">Home - pulang</b-nav-item>
@@ -29,7 +31,7 @@
         </b-collapse>
       </b-navbar>
       <aside>
-        <img src="@/assets/footer.jpg">
+        <img src="@/assets/footer.jpg" />
       </aside>
       <router-view
         @authenticated="setAuthenticated"
@@ -37,22 +39,21 @@
         @forceRerender="reRender"
       />
       <!-- key is nodig om een rerender te doen bij wijziging van userNow -->
-      <Footer :message="getFooterLine" :mention="userNow" :key="userNow" />
+      <!-- <Footer :message="getFooterLine" :mention="userNow" :key="userNow" /> -->
     </b-container>
   </div>
 </template>
 
 <script>
 import Loadingbar from "./components/Loadingbar";
-import Footer from "./views/Footer";
+//import Footer from "./views/Footer";
 import { mapGetters } from "vuex";
-
 
 export default {
   name: "App",
   components: {
-    Loadingbar,
-    Footer,
+    Loadingbar
+    //Footer,
   },
   metaInfo: {
     // if no subcomponents specify a metaInfo.title, this title will be used
@@ -119,12 +120,18 @@ export default {
   color: #fff;
 }
 
-.container-fluid { 
+html,
+.container-fluid {
   min-height: call(100vh);
   background-position: 70% top;
   background-repeat: no-repeat;
   background: rgb(97, 66, 36);
-  background: linear-gradient(90deg, rgba(97,66,36,1) 6%, rgba(141,122,58,1) 44%, rgba(179,166,114,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(97, 66, 36, 1) 6%,
+    rgba(141, 122, 58, 1) 44%,
+    rgba(179, 166, 114, 1) 100%
+  );
 }
 
 aside img {
@@ -136,7 +143,6 @@ figure img {
   margin: 0.5em 1em 0.5em 1em;
   height: 200px;
 }
-
 
 @media only screen and (min-width: 768px) {
   .container-fluid {
@@ -151,8 +157,7 @@ figure img {
     max-height: 50vh;
     float: left;
     margin: 0.5em 1em 0.5em 1em;
-}
-
+  }
 }
 
 h1 {

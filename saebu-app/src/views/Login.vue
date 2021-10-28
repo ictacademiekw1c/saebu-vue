@@ -24,7 +24,9 @@
     </div>
     <div>
       <label /><b-button type="button" v-on:click="login()">Login</b-button>
+      <b-navbar-nav>
       <b-nav-item to="/lupa">Wachtwoord vergeten| Lupa kata sandi</b-nav-item>
+      </b-navbar-nav>
     </div>
   </div>
 </template>

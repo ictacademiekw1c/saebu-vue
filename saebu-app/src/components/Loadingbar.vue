@@ -16,7 +16,7 @@
   opacity: 0.5;
   top: 0px;
   left: 0px;
-  animation: pulse 1s infinite;
+  animation: pulse 3s infinite;
 }
 @keyframes pulse {
   0% {
