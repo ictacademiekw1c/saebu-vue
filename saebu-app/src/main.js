@@ -15,15 +15,6 @@ Vue.use(VueTippy);
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
-/**************************************
-var host = location.hostname;
-if (host == "localhost") {
-  Vue.prototype.$mongoresturl = "http://localhost:8088/mongorestphp/";
-} else {
-  Vue.prototype.$mongoresturl = "https://saebu.nl/mongorest/";
-}
-*****************/
-
 Vue.prototype.$strapiendpoint =
   location.hostname === "localhost"
     ? "http://localhost:1337/"
@@ -39,5 +30,14 @@ new Vue({
       return this.$store.state.authenticated;
     }
   },
-  render: h => h(App)
+  render: h => h(App),
+  beforeRouteEnter(to, from, next) {
+    if (Object.keys(to.query).length !== 0) {
+      //if the url has query (?query)
+      next(vm => {
+        vm.resetCode = to.query.code;
+      });
+    }
+    next();
+  }
 }).$mount("#app");
