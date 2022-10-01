@@ -221,17 +221,19 @@ export default {
 
           this.$emit("ajaxCurrentlyBusyChange", true);
           this.axios
-            .post(this.$strapiendpoint + "pairs", {
-              //data: {
-              pairType: "motherchild",
-              member1: this.aPair[0].id,
-              member2: this.aPair[1].id,
-              //},
-              //authorisatie is nog even uitgezet, later nog eens fixen
-              headers: {
-                Authorization: "Bearer " + this.$store.state.jwt
+            .post(
+              this.$strapiendpoint + "pairs",
+              {
+                pairType: "motherchild",
+                member1: this.aPair[0].id,
+                member2: this.aPair[1].id
+              },
+              {
+                headers: {
+                  Authorization: "Bearer " + this.$store.state.jwt
+                }
               }
-            })
+            )
             .then(response => {
               console.log(response.data.id);
               this.$emit("ajaxCurrentlyBusyChange", false);
