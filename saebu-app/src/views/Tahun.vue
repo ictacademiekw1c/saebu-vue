@@ -156,17 +156,19 @@ export default {
       ].join("-");
 
       this.axios
-        .post(this.$strapiendpoint + "members", {
-          //data: {
-          firstname: this.member.firstname,
-          birthplace: this.member.birthplace,
-          birthdate: this.member.birthdate,
-          //},
-          //authorisatie is nog even uitgezet, later nog eens fixen
-          headers: {
-            Authorization: "Bearer " + this.$store.state.jwt
+        .post(
+          this.$strapiendpoint + "members",
+          {
+            firstname: this.member.firstname,
+            birthplace: this.member.birthplace,
+            birthdate: this.member.birthdate
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + this.$store.state.jwt
+            }
           }
-        })
+        )
         .then(response => {
           console.log(response.data.id);
           this.$emit("ajaxCurrentlyBusyChange", false);

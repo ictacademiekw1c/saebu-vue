@@ -86,6 +86,8 @@ export default {
 
       this.message = "";
       if (this.email != "" && this.password != "") {
+        console.log("Effe niet jongons");
+        /*
         this.$emit("ajaxCurrentlyBusyChange", true);
         const ep = this.$strapiendpoint + "auth/local/register";
         this.axios
@@ -108,6 +110,8 @@ export default {
               "Aanmelding mislukt, probeer een ander emailadres | Tidak jadi mendaftar, coba dengan alamat lain";
             this.$emit("ajaxCurrentlyBusyChange", false);
           });
+          */
+        this.$emit("ajaxCurrentlyBusyChange", false);
       } else {
         this.hasError = true;
         this.message = "All fields are required.";
