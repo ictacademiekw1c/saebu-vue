@@ -148,20 +148,29 @@ figure img {
   .container-fluid {
     min-height: 1000px;
   }
+
   aside img {
+    width: 33vw;
     display: block;
-    float: right;
+    position: absolute;
+    top: 120px;
+    right: 2vw;
+    bottom: 0;
+    margin: auto;
+    z-index: 10;
+    opacity: 0.9;
   }
   figure img {
-    max-width: 33%;
     max-height: 50vh;
     float: left;
     margin: 0.5em 1em 0.5em 1em;
   }
 }
 
-h1 {
+#app h1 {
   color: #f3b43f;
+  font-size: 2em;
+  padding-left: 0;;
 }
 
 h2 {

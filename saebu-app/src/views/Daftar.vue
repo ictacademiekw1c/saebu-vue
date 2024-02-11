@@ -1,59 +1,68 @@
 <template>
-  <div v-if="!registered" id="login">
-    <h1>Meld u aan als familielid | Mendaftar anda sebagai warga keluarga</h1>
-    <div class="msg" v-if="hasError">
-      <p>{{ message }}</p>
-    </div>
-    <form @submit.prevent="onSubmit">
-      <div>
-        <label>Naam | Namah:</label>&nbsp;<input
-          type="text"
-          name="username"
-          v-model="username"
-          placeholder="Username | Nama"
-        />
-      </div>
-      <div>
-        <label>Email:</label>&nbsp;<input
-          type="text"
-          name="email"
-          v-model="email"
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <label>Wachtwoord | Kata sandi:</label>&nbsp;<input
-          type="password"
-          name="password"
-          v-model="password"
-          placeholder="Wachtwoord | kata sandi"
-        />
-      </div>
-      <div>
-        <div id="recaptcha">
-          <vue-recaptcha
-            @verify="onVerify"
-            @expired="onExpired"
-            :loadRecaptchaScript="true"
-            sitekey="6LcZjVoaAAAAAA1So3w0WQb8SnhE0eSuFvaD6D0S"
-          >
-          </vue-recaptcha>
+  <div>
+    <div class="container" v-if="!registered" id="login">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>
+            Meld u aan als familielid | Mendaftar anda sebagai warga keluarga
+          </h1>
+          <div class="msg" v-if="hasError">
+            <p>{{ message }}</p>
+          </div>
+          <form @submit.prevent="onSubmit">
+            <div>
+              <label>Naam | Namah</label>&nbsp;<input
+                type="text"
+                name="username"
+                v-model="username"
+                placeholder="Username | Nama"
+              />
+            </div>
+            <div>
+              <label>Email</label>&nbsp;<input
+                type="text"
+                name="email"
+                v-model="email"
+                placeholder="Email"
+              />
+            </div>
+            <div>
+              <label>Wachtwoord | Kata sandi</label>&nbsp;<input
+                type="password"
+                name="password"
+                v-model="password"
+                placeholder="Wachtwoord | kata sandi"
+              />
+            </div>
+            <div>
+              <div id="recaptcha">
+                <vue-recaptcha
+                  @verify="onVerify"
+                  @expired="onExpired"
+                  :loadRecaptchaScript="true"
+                  sitekey="6LcZjVoaAAAAAA1So3w0WQb8SnhE0eSuFvaD6D0S"
+                >
+                </vue-recaptcha>
+              </div>
+            </div>
+            <div>
+              <b-button type="submit"> Verzend | Kirim </b-button>
+            </div>
+          </form>
         </div>
       </div>
-      <div>
-        <label />
-        <b-button type="submit">
-          Verzend | Kirim
-        </b-button>
+    </div>
+    <div class="container mt-5" v-else>
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Gelukt | Jadi</h1>
+          <p>
+            Klik nog op bevestigen in het emailbericht dat naar u is verzonden.
+            | Konfirmasikan anda alamat email.
+          </p>
+        </div>
       </div>
-    </form>
-  </div>
-  <div v-else>
-    <h2>Gelukt | Jadi</h2>
-    <p>
-      Klik nog op bevestigen in het emailbericht dat naar u is verzonden. |
-      Konfirmasikan anda alamat email.
-    </p>
+    </div>
   </div>
 </template>
 
@@ -65,16 +74,16 @@ export default {
   computed: {
     registered() {
       return this.registrationDone;
-    }
+    },
   },
   methods: {
-    onSubmit: function() {
+    onSubmit: function () {
       this.register();
     },
-    onVerify: function() {
+    onVerify: function () {
       this.noRobot = true;
     },
-    onExpired: function() {
+    onExpired: function () {
       console.log("Expired");
     },
     register() {
@@ -83,11 +92,8 @@ export default {
           "Engkau bukan manusia tetapi mesin. | Bewijs dat je geen robot bent.";
         return;
       }
-
       this.message = "";
-      if (this.email != "" && this.password != "") {
-        console.log("Effe niet jongons");
-        /*
+      if (this.email != "" && this.password != "") {        
         this.$emit("ajaxCurrentlyBusyChange", true);
         const ep = this.$strapiendpoint + "auth/local/register";
         this.axios
@@ -110,13 +116,12 @@ export default {
               "Aanmelding mislukt, probeer een ander emailadres | Tidak jadi mendaftar, coba dengan alamat lain";
             this.$emit("ajaxCurrentlyBusyChange", false);
           });
-          */
         this.$emit("ajaxCurrentlyBusyChange", false);
       } else {
         this.hasError = true;
         this.message = "All fields are required.";
       }
-    }
+    },
   },
   data() {
     return {
@@ -126,9 +131,9 @@ export default {
       message: "",
       registrationDone: false,
       hasError: false,
-      noRobot: false
+      noRobot: false,
     };
-  }
+  },
 };
 </script>
 
@@ -146,4 +151,17 @@ export default {
 ul {
   list-style-type: none;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#login input {
+  width: 20rem;
+}
+#login div {
+  margin: 0.5rem;
+}
+
 </style>
