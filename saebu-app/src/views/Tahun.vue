@@ -99,8 +99,12 @@ export default {
         birthdate_mm: null,
         birthdate_yy: null,
         birthdate: null
-      }
+      },
+      datasource: null
     };
+  },
+  created: function() {
+    this.datasource = this.getDataSource();
   },
   methods: {
     getDataSource: function(year) {
@@ -124,7 +128,7 @@ export default {
                 );
                 element.birthyear =
                   element.birthyear == undefined ? "?" : element.birthyear;
-                console.log(element);
+                
               });
               return result.data.map(r => ({
                 startDate: new Date(r.birthdate),

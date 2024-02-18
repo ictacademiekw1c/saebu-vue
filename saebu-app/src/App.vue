@@ -17,11 +17,12 @@
               >Login - Pintu masuk
             </b-nav-item>
 
+            <b-nav-item-dropdown text="Familie - Keluarga" v-if="this.$parent.isAuthenticated" to="/tree">
+              <b-dropdown-item to="/tahun">Familiekalender - Kalendar keluarga</b-dropdown-item>
+              <b-dropdown-item to="/members">Familieleden - Warga keluarga</b-dropdown-item>
+            </b-nav-item-dropdown>
             <b-nav-item v-if="this.$parent.isAuthenticated" to="/tree">
               Familieboom - Pohon sekeluarga
-            </b-nav-item>
-            <b-nav-item v-if="this.$parent.isAuthenticated" to="/tahun">
-              Familiekalender - Kalender tahunan
             </b-nav-item>
 
             <b-nav-item v-if="this.$parent.isAuthenticated" to="/logout"

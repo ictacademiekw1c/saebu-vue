@@ -7,6 +7,7 @@ import Selamat from "./views/Selamat.vue";
 import Sandibaru from "./views/Sandibaru.vue";
 import Daftar from "./views/Daftar.vue";
 import Tahun from "./views/Tahun.vue";
+import Members from "./views/Members.vue";
 
 import VueMeta from "vue-meta";
 import store from "./store";
@@ -67,6 +68,14 @@ let router = new Router({
       path: "/tahun",
       name: "Tahun",
       component: Tahun,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/members",
+      name: "Members",
+      component: Members,
       meta: {
         requiresAuth: true
       }

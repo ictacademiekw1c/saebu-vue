@@ -1,7 +1,15 @@
 <template>
   <!-- voorbeeld van https://github.com/r3code/vue-vis-network/blob/master/example/src/App.vue -->
   <div class="wrapper">
-    <h2>Pohon keluarga | Familie stamboom</h2>
+    <div id="aside" @click="toggleHelp">
+      <h3>Uitleg van de familieboom</h3>
+      <p >- De familieleden moeten altijd eerst worden toegevoegd in de kalender, voordat ze hier verschijnen<br>
+        - Maak eerst een keuze welke type relatie je wilt toevoegen, man/vrouw-man/vrouw relatie of moeder-kind relatie<br>
+        - Bij een relatie klik je eerst op de ene persoon en daarna op de andere persoon die je wilt toevoegen, je slaat het op door de groene knop te drukken.<br>
+        - Bij een moeder kind relatie klik je eerst op de moeder en daarna klik je op het kind, de relatie wordt opgeslagen zodra je de groene knop klikt.<br>
+      </p>
+    </div>
+    <div id="console" class="events">
     <b-form-radio-group
       id="radio-group"
       v-model="selected"
@@ -17,7 +25,7 @@
       @click="addCoupleEdge"
       >{{ lbl1 }} heeft een relatie met {{ lbl2 }}</b-button
     >
-    <b-button
+    <b-button       
       @click="addMotherChildEdge"
       v-if="selected == 'motherchild'"
       v-bind:class="{
@@ -26,6 +34,13 @@
       }"
       >{{ lbl1 }} is moeder van {{ lbl2 }}</b-button
     >
+
+    <b-button @click="resetaPair" 
+      >Reset selectie</b-button>
+      <b-button @click="toggleHelp" 
+      >Help ?</b-button>
+
+  </div>
 
     <network
       class="network"
@@ -66,7 +81,7 @@ export default {
   },
   mounted() {
     var bg = require("@/assets/treebg.jpg");
-    console.log(bg);
+    //console.log(bg);
     var sourceCanvas = document.querySelector("canvas");
     sourceCanvas.style.backgroundImage = "url(`bg`)";
   },
@@ -82,6 +97,19 @@ export default {
     }
   },
   methods: {
+    toggleHelp() {
+      var x = document.getElementById("aside");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+    resetaPair( ) {
+      this.aPair = emptyPair;
+      this.lbl1 = "?";
+      this.lbl2 = "?";
+    },
     networkEvent(eventName) {
       if (this.networkEvents.length > 500) this.networkEvents = "";
       this.networkEvents += `${eventName}, `;
@@ -302,7 +330,12 @@ export default {
 
 .network {
   height: 100vh;
+  top:54px;
+  position: absolute;
+  width: 100%;
+  z-index: 900;
 }
+
 canvas {
   position: absolute;
   top: 0%;
@@ -313,11 +346,74 @@ aside {
   display: none;
 }
 
+div#aside {
+  width: 20vw;
+  display: block;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 120px;
+  right: 2vw;
+  bottom: 0;
+  margin: auto;
+  z-index: 901;
+  opacity: 0.7;
+}
+div#aside h3 {
+  padding: 5px;
+  font-size: medium;
+  color: black;
+  text-align: center;
+  text-decoration: underline;
+}
+
+div#aside p {
+  padding: 5px;
+  font-size: small;
+  color: black;
+  text-align: left;
+}
+
+
+
 .green,
 .green:hover {
   background-color: darkolivegreen;
 }
+
 .red {
   background-color: red;
 }
+
+.orange {
+  background-color: orange;
+}
+
+div#console {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  font-size: small;
+  text-align: left;
+  padding: 0.2rem ;
+  bottom: 5px;
+  left: 5px;
+  width: 100vw;
+  height: 2rem;
+  border: 1px solid black;
+  background-color:darkcyan;
+  overflow: auto;
+  z-index: 1000;
+
+}
+
+div#console button {
+  width: 250px;
+  height: auto;
+  margin: 0.2rem;
+  padding: 0.2rem;
+  align-items: center;
+  font-size: small;
+} 
+
 </style>
